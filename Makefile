@@ -40,11 +40,11 @@ docker:
 	echo "deb [arch=$$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ;\
 	sudo apt update ; \
 	sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin ; \
-	## Make sure Docker is running before setting up your user
-	sudo groupadd docker; \
-	sudo usermod -aG docker $$USER;\
-	newgrp docker;\
-        docker run hello-world; 
+#	## Make sure Docker is running before setting up your user
+#	sudo groupadd docker; \
+#	sudo usermod -aG docker $$USER;\
+#	newgrp docker;\
+#        docker run hello-world; 
 
 
 ## The following are Analog/Digital Design installs
