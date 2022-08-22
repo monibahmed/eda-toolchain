@@ -12,7 +12,14 @@ ubuntu:
 		tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
 		gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev; 
 
+
+## Install Docker Desktop manually first
 ## https://docs.docker.com/engine/install/ubuntu/
+## Enable Docker integration for WSL:
+## https://docs.docker.com/desktop/windows/wsl/
+## https://docs.docker.com/engine/install/linux-postinstall/
+## Optional: Shutdown/Restart Ubuntu
+##  'docker run hello-world' should work 
 docker: 
 	sudo apt update ; \
 	sudo apt-get install -y ca-certificates curl gnupg lsb-release ; \
@@ -21,10 +28,12 @@ docker:
 	echo "deb [arch=$$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ;\
 	sudo apt update ; \
 	sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin ; \
+	## Make sure Docker is running before setting up your user
 	sudo groupadd docker; \
 	sudo usermod -aG docker $$USER;\
 	newgrp docker;\
         docker run hello-world; 
+
 
 ## The following are Analog/Digital Design installs
 openlane:
@@ -40,7 +49,7 @@ xschem:
 	./configure && make -j16 && sudo make install; \
         #mkdir ${HOME}/.xschem && cp -rf ${INSTALLER_PATH}/$@/src/xschemrc ~/.xschem/.
 
-	
+## Two installs, one for shared and one for executable	
 ngspice: 
 	git clone https://git.code.sf.net/p/ngspice/ngspice ;\
 	cd $@; \
@@ -49,11 +58,11 @@ ngspice:
 	cd release; \
 	../configure --with-x --enable-xspice --disable-debug \
 		--enable-cider --with-readline=yes --enable-openmp --with-adms; \
-	make -j16 && sudo make -j16 install; \
+	make -j16 && sudo make install; \
 	make clean; \
 	../configure --with-ngshared --with-x --enable-xspice --disable-debug \
 		--enable-cider --with-readline=yes --enable-openmp --with-adms; \
-	make -j16 && sudo make -j16 install; 
+	make -j16 && sudo make install; 
 	
 magical: 
 	git clone https://github.com/magical-eda/MAGICAL.git $@;\
