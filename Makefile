@@ -1,6 +1,8 @@
 PREFIX := $(HOME)/tools
 INSTALLER_PATH := $(HOME)/installers
 
+### Please do 'sudo apt install make -y' first 
+
 ubuntu:
 	sudo apt update; \
 	sudo apt upgrade -y; \
