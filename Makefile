@@ -2,6 +2,7 @@ PREFIX := $(HOME)/tools
 INSTALLER_PATH := $(HOME)/installers
 
 ### Please do 'sudo apt install make -y' first 
+### Manually setup docker for WSL rather than using Makefile
 
 ubuntu:
 	sudo apt update; \
@@ -12,9 +13,16 @@ ubuntu:
 		tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
 		gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev; 
 
+
+## UNTESTED
+## https://ostechnix.com/enable-conda-forge-channel-for-conda-package-manager/
 conda: 
 	wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh ;\
-        sh Anaconda3-2022.05-Linux-x86_64.sh -b;
+        sh Anaconda3-2022.05-Linux-x86_64.sh -b ;\
+	$(HOME)/anaconda3/bin/conda init ;\
+	su $(USER) ;\
+	conda config --add channels conda-forge ;\
+	conda install micromamba -y;\
 	
 
 ## Install Docker Desktop manually first
@@ -46,12 +54,18 @@ openlane:
 	make; \
 	make test; \
 
+openlane_test:
+	git clone https://github.com/The-OpenROAD-Project/OpenLane.git; \
+	cd OpenLane; \
+	make; \
+	make test; \
 	
 xschem: 
 	git clone https://github.com/StefanSchippers/xschem.git ; \
 	cd $@ ; \
 	./configure && make -j16 && sudo make install; \
         #mkdir ${HOME}/.xschem && cp -rf ${INSTALLER_PATH}/$@/src/xschemrc ~/.xschem/.
+
 
 ## Two installs, one for shared and one for executable	
 ngspice: 
@@ -77,7 +91,6 @@ magical:
 	docker run -it -v $$(pwd):/MAGICAL jayl940712/magical:latest bash ;\
 	#docker build . --file Dockerfile --tag magical:latest ;\
 	#docker run -it -v $$(pwd):/MAGICAL magical:latest bash ;\
-
 
 iverilog:
 	git clone https://github.com/steveicarus/iverilog.git ;\
