@@ -12,7 +12,7 @@ ubuntu:
 		tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
 		gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev; 
 
-
+## https://docs.docker.com/engine/install/ubuntu/
 docker: 
 	sudo apt update ; \
 	sudo apt-get install -y ca-certificates curl gnupg lsb-release ; \
