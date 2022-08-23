@@ -58,7 +58,6 @@ yosys:
 klayout:
 	sudo apt-get install -y klayout; \
 
-
 openroad:
 	git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ;\
         cd OpenROADi ;\
@@ -67,10 +66,10 @@ openroad:
         ./etc/Build.sh ;\ 
 
 open_pdks:
-	git clone https://github.com/RTimothyEdwards/open_pdks.git ;\ 
+	git clone https://github.com/RTimothyEdwards/open_pdks.git ;\
 	cd $@ ;\
-	./configure --enable-sky130-pdk ; \
-	make -j16 && make install; \
+	./configure --enable-sky130-pdk ;\
+	make -j16 && make install ;\
 
 openlane:
 	git clone https://github.com/The-OpenROAD-Project/OpenLane.git ;\
@@ -109,8 +108,6 @@ verilator:
 	make -j16 && sudo make install;
 
 
-
-	
 ###############################################################################
 #### ANYTHING BELOW THIS LINE IS A WORK IN PROGRESS - USE AT YOUR OWN RISK ####
 ###############################################################################
@@ -171,12 +168,6 @@ qrouter:
 	git clone https://github.com/RTimothyEdwards/qrouter.git; \
         ./configure; \
 	make -j8 && sudo make install; 
-openroad:
-	git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
-	cd OpenROAD; \
-	sudo ./etc/DependencyInstaller.sh -runtime; \
-	sudo ./etc/DependencyInstaller.sh -development; \
-	./etc/Build.sh; \
 
 cuda:
 	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb; \
