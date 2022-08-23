@@ -10,10 +10,10 @@ fe-tools: xschem ngspice verilator iverilog
 ubuntu-update:
 	sudo apt update; \
         sudo apt upgrade -y; \
-        sudo apt install -y build-essential clang python3 python3-venv python3-pip; \
+        sudo apt install -y build-essential clang python3 python3-venv python3-pip python-yaml ;\
         sudo apt install -y libx11-xcb-dev libx11-dev libxrender1 libxrender-dev libxcb1 \
                 libx11-xcb-dev libcairo2 libcairo2-dev gperf csh autopoint \
-                tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
+                tcl8.6 tcl8.6-dev tcllib tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
                 gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev;
 
 conda:
@@ -56,7 +56,7 @@ yosys:
         make -j8 && sudo make install;
 
 klayout:
-	sudo apt-get install klayout; \
+	sudo apt-get install -y klayout; \
 
 
 openroad:
@@ -94,7 +94,7 @@ ngspice:
 		--enable-cider --with-readline=yes --enable-openmp --with-adms; \
 	make -j16 && sudo make install; 
 	
-verilog:
+iverilog:
 	git clone https://github.com/steveicarus/iverilog.git ;\
 	cd $@ ;\
 	sh autoconf.sh; \
