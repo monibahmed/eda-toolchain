@@ -17,11 +17,12 @@ ubuntu:
 ## UNTESTED
 ## https://ostechnix.com/enable-conda-forge-channel-for-conda-package-manager/
 conda:
-	sh Miniconda3-py37_4.12.0-Linux-x86_64.sh -b ;\
+	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh ;\
+	sh Miniconda3-latest-Linux-x86_64.sh -b ;\
 	$(HOME)/miniconda3/bin/conda init ;\
-	su $(USER) ;\
-	conda config --add channels conda-forge litex-hub;\
-	conda install micromamba -y;\
+	$(HOME)/miniconda3/bin/conda config --add channels conda-forge ;\
+	$(HOME)/miniconda3/bin/conda config --add channels litex-hub ;\
+	$(HOME)/miniconda3/bin/conda install micromamba -y;\
 	
 
 ## Install Docker Desktop manually first
