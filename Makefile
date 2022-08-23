@@ -12,7 +12,7 @@ ubuntu-update:
         sudo apt upgrade -y; \
         sudo apt install -y build-essential clang python3 python3-venv python3-pip python-yaml ;\
         sudo apt install -y libx11-xcb-dev libx11-dev libxrender1 libxrender-dev libxcb1 \
-                libx11-xcb-dev libcairo2 libcairo2-dev gperf csh autopoint \
+                libx11-xcb-dev libcairo2 libcairo2-dev gperf csh autopoint python-click\
                 tcl8.6 tcl8.6-dev tcllib tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
                 gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev;
 
@@ -56,21 +56,27 @@ yosys:
         make -j8 && sudo make install;
 
 klayout:
-	sudo apt-get install -y klayout; \
+	sudo apt install -y klayout; \
 
+
+gdstk:
+	git clone https://github.com/heitzmann/gdstk.git ;\
+	cd $@ ;\
+	cmake -S . -B build ;\
+	sudo cmake --build build --target install ;\
 
 openroad:
 	git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ;\
-        cd OpenROADi ;\
+        cd OpenROAD ;\
         sudo ./etc/DependencyInstaller.sh -runtime ;\
         sudo ./etc/DependencyInstaller.sh -development ;\
-        ./etc/Build.sh ;\ 
+        ./etc/Build.sh ;\
 
 open_pdks:
-	git clone https://github.com/RTimothyEdwards/open_pdks.git ;\ 
+	git clone https://github.com/RTimothyEdwards/open_pdks.git ;\
 	cd $@ ;\
-	./configure --enable-sky130-pdk ; \
-	make -j16 && make install; \
+	./configure --enable-sky130-pdk --prefix=${PWD}/../;\
+	make -j16 && make install ;\
 
 openlane:
 	git clone https://github.com/The-OpenROAD-Project/OpenLane.git ;\
@@ -109,8 +115,6 @@ verilator:
 	make -j16 && sudo make install;
 
 
-
-	
 ###############################################################################
 #### ANYTHING BELOW THIS LINE IS A WORK IN PROGRESS - USE AT YOUR OWN RISK ####
 ###############################################################################
@@ -133,12 +137,12 @@ magical:
 ##  'docker run hello-world' should work 
 docker: 
 	sudo apt update ; \
-	sudo apt-get install -y ca-certificates curl gnupg lsb-release ; \
+	sudo apt install -y ca-certificates curl gnupg lsb-release ; \
 	sudo mkdir -p /etc/apt/keyrings; \
  	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg; \
 	echo "deb [arch=$$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ;\
 	sudo apt update ; \
-	sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin ; \
+	sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin ; \
 #	## Make sure Docker is running before setting up your user
 #	sudo groupadd docker; \
 #	sudo usermod -aG docker $$USER;\
@@ -171,18 +175,12 @@ qrouter:
 	git clone https://github.com/RTimothyEdwards/qrouter.git; \
         ./configure; \
 	make -j8 && sudo make install; 
-openroad:
-	git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
-	cd OpenROAD; \
-	sudo ./etc/DependencyInstaller.sh -runtime; \
-	sudo ./etc/DependencyInstaller.sh -development; \
-	./etc/Build.sh; \
 
 cuda:
 	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb; \
 	sudo dpkg -i cuda-keyring_1.0-1_all.deb; \
-	sudo apt-get update; \
-	sudo apt-get -y install cuda; \
+	sudo apt update; \
+	sudo apt -y install cuda; \
 
 openroad-gpu:
 	#git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
@@ -192,4 +190,17 @@ openroad-gpu:
 	CUDACXX=/usr/local/cuda-11.7/bin/nvcc ./etc/Build.sh -cmake="-DGPU=true -DCUDAToolkit_ROOT=/usr/local/cuda-11.7"
 
 clean:
-	rm  -rf $(HOME)/tools $(HOME)/installers ${HOME}/.xschem
+	sudo rm -rf \
+	Miniconda3-latest-Linux-x86_64.sh* \
+	open_pdks\
+	OpenROAD \
+	open_pdks \
+	cvc \
+	gdstk \
+	iverilog \
+	magic \
+	netgen \
+	ngspice \
+	verilator \
+	xschem \
+	yosys ;\

@@ -2,7 +2,7 @@
 
 echo $HOME
 
-export PATH=$PATH:$HOME/OpenLane:$HOME/OpenLane/scripts
+export PATH=$PATH:$PWD/OpenLane:$PWD/OpenLane/scripts
 export PDK_ROOT=$HOME/OpenLane/pdks
 export PDK=sky130A
 export STD_CELL_LIBRARY=sky130_fd_sc_hd
