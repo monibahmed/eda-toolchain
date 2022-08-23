@@ -190,4 +190,17 @@ openroad-gpu:
 	CUDACXX=/usr/local/cuda-11.7/bin/nvcc ./etc/Build.sh -cmake="-DGPU=true -DCUDAToolkit_ROOT=/usr/local/cuda-11.7"
 
 clean:
-	rm  -rf $(HOME)/tools $(HOME)/installers ${HOME}/.xschem
+	sudo rm -rf \
+	Miniconda3-latest-Linux-x86_64.sh* \
+	open_pdks\
+	OpenROAD \
+	open_pdks \
+	cvc \
+	gdstk \
+	iverilog \
+	magic \
+	netgen \
+	ngspice \
+	verilator \
+	xschem \
+	yosys ;\
