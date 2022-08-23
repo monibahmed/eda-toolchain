@@ -1,0 +1,112 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO inverter
+  CLASS BLOCK ;
+  FOREIGN inverter ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 50.000 BY 50.000 ;
+  PIN VGND
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER met4 ;
+        RECT 14.380 10.640 15.980 38.855 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 24.040 10.640 25.640 38.855 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 33.700 10.640 35.300 38.855 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 43.360 10.640 44.960 38.855 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 16.870 44.960 18.470 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 23.665 44.960 25.265 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 30.460 44.960 32.060 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 37.255 44.960 38.855 ;
+    END
+  END VGND
+  PIN VPWR
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER met4 ;
+        RECT 9.550 10.640 11.150 38.320 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 19.210 10.640 20.810 38.320 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 28.870 10.640 30.470 38.320 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 38.530 10.640 40.130 38.320 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 13.475 44.400 15.075 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 20.270 44.400 21.870 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 27.065 44.400 28.665 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 33.860 44.400 35.460 ;
+    END
+  END VPWR
+  PIN in
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 48.390 46.000 48.670 50.000 ;
+    END
+  END in
+  PIN out
+    DIRECTION OUTPUT TRISTATE ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.090 0.000 0.370 4.000 ;
+    END
+  END out
+  OBS
+      LAYER li1 ;
+        RECT 5.520 10.795 44.160 38.165 ;
+      LAYER met1 ;
+        RECT 0.070 10.640 48.690 38.320 ;
+      LAYER met2 ;
+        RECT 0.100 45.720 48.110 46.000 ;
+        RECT 0.100 4.280 48.660 45.720 ;
+        RECT 0.650 4.000 48.660 4.280 ;
+      LAYER met3 ;
+        RECT 9.560 10.715 44.950 38.245 ;
+  END
+END inverter
+END LIBRARY
+

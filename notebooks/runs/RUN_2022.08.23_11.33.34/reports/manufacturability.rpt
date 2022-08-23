@@ -1,0 +1,17 @@
+Design Name: inverter
+Run Directory: /home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34
+----------------------------------------
+
+Magic DRC Summary:
+Source: /home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34/reports/signoff/drc.rpt
+Total Magic DRC violations is 0
+----------------------------------------
+
+LVS Summary:
+Source: /home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34/logs/signoff/36-inverter.lvs.lef.log
+LVS reports no net, device, pin, or property mismatches.
+Total errors = 0
+----------------------------------------
+
+Antenna Summary:
+No antenna report found.

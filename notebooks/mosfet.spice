@@ -1,0 +1,7 @@
+* NGSPICE file created from mosfet.ext - technology: sky130A
+
+.subckt mosfet drain gate source
+X0 drain gate source VSUBS sky130_fd_pr__nfet_01v8 ad=2.6e+11p pd=2.1e+06u as=2.6e+11p ps=2.1e+06u w=650000u l=150000u
+C0 gate VSUBS 0.18fF
+.ends
+

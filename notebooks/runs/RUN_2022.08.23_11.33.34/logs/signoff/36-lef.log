@@ -1,0 +1,95 @@
+Netgen 1.5.227 compiled on Fri Aug 19 17:49:44 UTC 2022
+Warning: netgen command 'format' use fully-qualified name '::netgen::format'
+Warning: netgen command 'global' use fully-qualified name '::netgen::global'
+Generating JSON file result
+Reading netlist file /home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34/results/signoff/inverter.spice
+Reading netlist file /home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34/tmp/signoff/33-powered_netlist.v
+Warning:  A case-insensitive file has been read and so the	verilog file must be treated case-insensitive to match.
+Creating placeholder cell definition for module sky130_fd_sc_hd__decap_6.
+Creating placeholder cell definition for module sky130_fd_sc_hd__fill_1.
+Creating placeholder cell definition for module sky130_ef_sc_hd__decap_12.
+Creating placeholder cell definition for module sky130_fd_sc_hd__fill_2.
+Creating placeholder cell definition for module sky130_fd_sc_hd__decap_3.
+Creating placeholder cell definition for module sky130_fd_sc_hd__decap_4.
+Creating placeholder cell definition for module sky130_fd_sc_hd__tapvpwrvgnd_1.
+Creating placeholder cell definition for module sky130_fd_sc_hd__inv_2.
+Creating placeholder cell definition for module sky130_fd_sc_hd__clkbuf_1.
+Creating placeholder cell definition for module sky130_fd_sc_hd__buf_2.
+Reading setup file /home/mariowei/anaconda3/envs/nolimits/share/pdk/sky130A/libs.tech/netgen/sky130A_setup.tcl
+Comparison output logged to file /home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34/logs/signoff/36-inverter.lef.log
+Logging to file "/home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34/logs/signoff/36-inverter.lef.log" enabled
+Circuit sky130_ef_sc_hd__decap_12 contains no devices.
+Circuit sky130_fd_sc_hd__fill_2 contains no devices.
+Circuit sky130_fd_sc_hd__decap_6 contains no devices.
+Circuit sky130_fd_sc_hd__fill_1 contains no devices.
+Circuit sky130_fd_sc_hd__decap_3 contains no devices.
+Circuit sky130_fd_sc_hd__decap_4 contains no devices.
+Circuit sky130_fd_sc_hd__clkbuf_1 contains no devices.
+Circuit sky130_fd_sc_hd__tapvpwrvgnd_1 contains no devices.
+Circuit sky130_fd_sc_hd__inv_2 contains no devices.
+Circuit sky130_fd_sc_hd__buf_2 contains no devices.
+
+Contents of circuit 1:  Circuit: 'inverter'
+Circuit inverter contains 120 device instances.
+  Class: sky130_fd_sc_hd__buf_2 instances:   1
+  Class: sky130_ef_sc_hd__decap_12 instances:  57
+  Class: sky130_fd_sc_hd__inv_2 instances:   1
+  Class: sky130_fd_sc_hd__clkbuf_1 instances:   1
+  Class: sky130_fd_sc_hd__decap_3 instances:  22
+  Class: sky130_fd_sc_hd__decap_4 instances:   8
+  Class: sky130_fd_sc_hd__decap_6 instances:   3
+  Class: sky130_fd_sc_hd__tapvpwrvgnd_1 instances:  12
+  Class: sky130_fd_sc_hd__fill_1 instances:  12
+  Class: sky130_fd_sc_hd__fill_2 instances:   3
+Circuit contains 6 nets.
+Contents of circuit 2:  Circuit: 'inverter'
+Circuit inverter contains 120 device instances.
+  Class: sky130_fd_sc_hd__buf_2 instances:   1
+  Class: sky130_ef_sc_hd__decap_12 instances:  57
+  Class: sky130_fd_sc_hd__inv_2 instances:   1
+  Class: sky130_fd_sc_hd__clkbuf_1 instances:   1
+  Class: sky130_fd_sc_hd__decap_3 instances:  22
+  Class: sky130_fd_sc_hd__decap_4 instances:   8
+  Class: sky130_fd_sc_hd__decap_6 instances:   3
+  Class: sky130_fd_sc_hd__tapvpwrvgnd_1 instances:  12
+  Class: sky130_fd_sc_hd__fill_1 instances:  12
+  Class: sky130_fd_sc_hd__fill_2 instances:   3
+Circuit contains 6 nets.
+
+Circuit was modified by parallel/series device merging.
+New circuit summary:
+
+Contents of circuit 1:  Circuit: 'inverter'
+Circuit inverter contains 10 device instances.
+  Class: sky130_fd_sc_hd__buf_2 instances:   1
+  Class: sky130_ef_sc_hd__decap_12 instances:   1
+  Class: sky130_fd_sc_hd__inv_2 instances:   1
+  Class: sky130_fd_sc_hd__clkbuf_1 instances:   1
+  Class: sky130_fd_sc_hd__decap_3 instances:   1
+  Class: sky130_fd_sc_hd__decap_4 instances:   1
+  Class: sky130_fd_sc_hd__decap_6 instances:   1
+  Class: sky130_fd_sc_hd__tapvpwrvgnd_1 instances:   1
+  Class: sky130_fd_sc_hd__fill_1 instances:   1
+  Class: sky130_fd_sc_hd__fill_2 instances:   1
+Circuit contains 6 nets.
+Contents of circuit 2:  Circuit: 'inverter'
+Circuit inverter contains 10 device instances.
+  Class: sky130_fd_sc_hd__buf_2 instances:   1
+  Class: sky130_ef_sc_hd__decap_12 instances:   1
+  Class: sky130_fd_sc_hd__inv_2 instances:   1
+  Class: sky130_fd_sc_hd__clkbuf_1 instances:   1
+  Class: sky130_fd_sc_hd__decap_3 instances:   1
+  Class: sky130_fd_sc_hd__decap_4 instances:   1
+  Class: sky130_fd_sc_hd__decap_6 instances:   1
+  Class: sky130_fd_sc_hd__tapvpwrvgnd_1 instances:   1
+  Class: sky130_fd_sc_hd__fill_1 instances:   1
+  Class: sky130_fd_sc_hd__fill_2 instances:   1
+Circuit contains 6 nets.
+
+Circuit 1 contains 10 devices, Circuit 2 contains 10 devices.
+Circuit 1 contains 6 nets,    Circuit 2 contains 6 nets.
+
+Netlists match uniquely.
+Result: Circuits match uniquely.
+Logging to file "/home/mariowei/eda-toolchain/notebooks/runs/RUN_2022.08.23_11.33.34/logs/signoff/36-inverter.lef.log" disabled
+LVS Done.
