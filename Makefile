@@ -49,10 +49,10 @@ docker:
 
 ## The following are Analog/Digital Design installs
 openlane:
-	git clone https://github.com/The-OpenROAD-Project/OpenLane.git; \
-	cd OpenLane; \
-	make; \
-	make test; \
+	#git clone https://github.com/The-OpenROAD-Project/OpenLane.git ;\
+	cd OpenLane ;\
+	make pdk ;\
+	export PATH=$(PATH):$(PWD)/OpenLane:$(PWD)/OpenLane/scripts ;\
 
 openlane_test:
 	git clone https://github.com/The-OpenROAD-Project/OpenLane.git; \
