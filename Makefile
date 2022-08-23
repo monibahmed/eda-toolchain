@@ -9,7 +9,7 @@ ubuntu:
 	sudo apt upgrade -y; \
 	sudo apt install -y build-essential clang python3 python3-venv python3-pip; \
 	sudo apt install -y libx11-xcb-dev libx11-dev libxrender1 libxrender-dev libxcb1 \
-       		libx11-xcb-dev libcairo2 libcairo2-dev gperf \
+       		libx11-xcb-dev libcairo2 libcairo2-dev gperf csh autopoint \
 		tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
 		gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev; 
 
@@ -121,28 +121,6 @@ gh-cli:
 	sudo apt update ;\
 	sudo apt install -y gh ;\
 
-libs: 	
-	sudo apt install -y fish csh tcsh tree tcllib cmake ninja-build doxygen graphviz; \
-	sudo apt install -y build-essential python3 python3-venv python3-pip; \
-	sudo apt-get install -y build-essential clang bison flex \
-	libreadline-dev gperf gawk tcl-dev libffi-dev git \
-	graphviz xdot pkg-config python3 libboost-system-dev \
-	libboost-python-dev libboost-filesystem-dev zlib1g-dev libgsl-dev; \
-	sudo apt install -y libeigen3-dev libspdlog-dev libcairo2 libcairo2-dev tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev gawk libtool automake autoconf autopoint libx11-dev libxrender1 libxrender-dev ;
-
-cuda:
-	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb; \
-	sudo dpkg -i cuda-keyring_1.0-1_all.deb; \
-	sudo apt-get update; \
-	sudo apt-get -y install cuda; \
-
-qt5:
-	git clone https://github.com/qt/qt5.git ${INSTALLER_PATH}/$@; \
-	cd ${INSTALLER_PATH}/$@; \
-	./init-repository; \
-	./configure -prefix $PWD/qtbase; \
-	cmake --build .;
-	
 magic:
 	git clone https://github.com/RTimothyEdwards/magic.git ; \
 	cd $@ ; \
@@ -208,9 +186,20 @@ openroad:
 	sudo ./etc/DependencyInstaller.sh -runtime; \
 	sudo ./etc/DependencyInstaller.sh -development; \
 	./etc/Build.sh; \
-	#CUDACXX=/usr/local/cuda-11.7/bin/nvcc ./etc/Build.sh -cmake="-DCMAKE_INSTALL_PREFIX=$HOME/tools -DGPU=true"
-	#cmake .. -DCMAKE_INSTALL_PREFIX=${PREFIX} ..; \
-	#make -j16 && make -j16 install; 
+
+cuda:
+	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb; \
+	sudo dpkg -i cuda-keyring_1.0-1_all.deb; \
+	sudo apt-get update; \
+	sudo apt-get -y install cuda; \
+
+openroad-gpu:
+	#git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
+	cd OpenROAD; \
+	sudo ./etc/DependencyInstaller.sh -runtime; \
+	sudo ./etc/DependencyInstaller.sh -development; \
+	CUDACXX=/usr/local/cuda-11.7/bin/nvcc ./etc/Build.sh -cmake="-DGPU=true -DCUDAToolkit_ROOT=/usr/local/cuda-11.7"
+
 
 open_pdks:
 	git clone https://github.com/RTimothyEdwards/open_pdks.git ${INSTALLER_PATH}/$@; \
