@@ -206,8 +206,5 @@ open_pdks:
 	./configure  --enable-sky130-pdk --prefix=${PREFIX}; \
 	make -j16 && make -j16 install; \
 
-setup:
-	export PATH=\$PATH:${PREFIX}/bin ; \
-
 clean:
 	rm  -rf $(HOME)/tools $(HOME)/installers ${HOME}/.xschem
