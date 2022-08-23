@@ -17,11 +17,11 @@ ubuntu:
 ## UNTESTED
 ## https://ostechnix.com/enable-conda-forge-channel-for-conda-package-manager/
 conda: 
-	wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh ;\
-        sh Anaconda3-2022.05-Linux-x86_64.sh -b ;\
-	$(HOME)/anaconda3/bin/conda init ;\
+	#wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh ;\
+        #sh Miniconda3-py37_4.12.0-Linux-x86_64.sh -b;\
+	$(HOME)/miniconda3/bin/conda init ;\
 	su $(USER) ;\
-	conda config --add channels conda-forge ;\
+	conda config --add channels conda-forge litex-hub;\
 	conda install micromamba -y;\
 	
 
