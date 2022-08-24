@@ -12,9 +12,15 @@ ubuntu-update:
         sudo apt upgrade -y; \
         sudo apt install -y build-essential clang python3 python3-venv python3-pip python-yaml ;\
         sudo apt install -y libx11-xcb-dev libx11-dev libxrender1 libxrender-dev libxcb1 \
-                libx11-xcb-dev libcairo2 libcairo2-dev gperf csh autopoint python-click\
+                libx11-xcb-dev libcairo2 libcairo2-dev gperf csh autopoint \
                 tcl8.6 tcl8.6-dev tcllib tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
                 gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev;
+
+tcllib: 
+	wget https://core.tcl-lang.org/tcllib/uv/tcllib-1.20.zip ;\
+	unzip tcllib_1_20.zip ;\
+	
+
 
 conda:
 	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh ;\
@@ -63,7 +69,7 @@ openroad:
         cd OpenROAD ;\
         sudo ./etc/DependencyInstaller.sh -runtime ;\
         sudo ./etc/DependencyInstaller.sh -development ;\
-        ./etc/Build.sh && sudo make -j16 install;\
+        ./etc/Build.sh && cd build && sudo make -j16 install;\
         
 open_pdks:
 	git clone https://github.com/RTimothyEdwards/open_pdks.git ;\
@@ -183,17 +189,5 @@ openroad-gpu:
 	CUDACXX=/usr/local/cuda-11.7/bin/nvcc ./etc/Build.sh -cmake="-DGPU=true -DCUDAToolkit_ROOT=/usr/local/cuda-11.7"
 
 clean:
-	sudo rm -rf \
-	Miniconda3-latest-Linux-x86_64.sh* \
-	open_pdks\
-	OpenROAD \
-	open_pdks \
-	cvc \
-	gdstk \
-	iverilog \
-	magic \
-	netgen \
-	ngspice \
-	verilator \
-	xschem \
-	yosys ;\
+	sudo rm -rf OpenROAD Miniconda3-latest-Linux-x86_64.sh* \
+		open_pdks cvc iverilog magic netgen ngspice verilator xschem yosys ;\
