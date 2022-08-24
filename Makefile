@@ -53,29 +53,22 @@ yosys:
 	git clone https://github.com/YosysHQ/yosys.git ;\
         cd $@ ;\
         make config-gcc ;\
-        make -j8 && sudo make install;
+        make -j16 && sudo make install;
 
 klayout:
 	sudo apt install -y klayout; \
-
-
-gdstk:
-	git clone https://github.com/heitzmann/gdstk.git ;\
-	cd $@ ;\
-	cmake -S . -B build ;\
-	sudo cmake --build build --target install ;\
 
 openroad:
 	git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ;\
         cd OpenROAD ;\
         sudo ./etc/DependencyInstaller.sh -runtime ;\
         sudo ./etc/DependencyInstaller.sh -development ;\
-        ./etc/Build.sh ;\
-
+        ./etc/Build.sh && sudo make -j16 install;\
+        
 open_pdks:
 	git clone https://github.com/RTimothyEdwards/open_pdks.git ;\
 	cd $@ ;\
-	./configure --enable-sky130-pdk --prefix=${HOME}/eda-toolchain/pdks;\
+	./configure --enable-sky130-pdk --prefix=${HOME}/eda-toolchain ;\
 	make -j16 && make install ;\
 
 openlane:
