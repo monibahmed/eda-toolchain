@@ -1,7 +1,7 @@
 ### Please do 'sudo apt install make -y' first
 ### Manually setup docker for WSL rather than using Makefile
 
-ubuntu: ubuntu-update conda gh-cli
+ubuntu: ubuntu-update conda 
 be-tools: magic yosys netgen cvc klayout
 open-tools: openroad open_pdks openlane
 fe-tools: xschem ngspice verilator iverilog
@@ -16,12 +16,6 @@ ubuntu-update:
                 tcl8.6 tcl8.6-dev tcllib tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
                 gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev;
 
-tcllib: 
-	wget https://core.tcl-lang.org/tcllib/uv/tcllib-1.20.zip ;\
-	unzip tcllib_1_20.zip ;\
-	
-
-
 conda:
 	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh ;\
         sh Miniconda3-latest-Linux-x86_64.sh -b ;\
@@ -29,34 +23,27 @@ conda:
         $(HOME)/miniconda3/bin/conda config --add channels conda-forge ;\
         $(HOME)/miniconda3/bin/conda config --add channels litex-hub ;\
 
-gh-cli:
-	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg ;\
-        sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg ;\
-        echo "deb [arch=$$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null ;\
-        sudo apt update ;\
-        sudo apt install -y gh ;\
-
 magic:
-	git clone https://github.com/RTimothyEdwards/magic.git ; \
+	git clone --depth=1 https://github.com/RTimothyEdwards/magic.git ; \
         cd $@ ; \
         ./configure ; \
         make -j16 && sudo make install;
 
 cvc:
-	git clone https://github.com/d-m-bailey/cvc.git ;  \
+	git clone --depth=1 https://github.com/d-m-bailey/cvc.git ;  \
         cd $@; \
         autoreconf -vif; \
         ./configure --disable-nls; \
         make -j16 && sudo make install;
 
 netgen:
-	git clone https://github.com/RTimothyEdwards/netgen.git; \
+	git clone --depth=1 https://github.com/RTimothyEdwards/netgen.git; \
         cd $@; \
         ./configure ; \
         make -j16 && sudo make install;
 
 yosys:
-	git clone https://github.com/YosysHQ/yosys.git ;\
+	git clone --depth=1 https://github.com/YosysHQ/yosys.git ;\
         cd $@ ;\
         make config-gcc ;\
         make -j16 && sudo make install;
@@ -65,28 +52,28 @@ klayout:
 	sudo apt install -y klayout; \
 
 openroad:
-	git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ;\
+	git clone --depth=1 --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ;\
         cd OpenROAD ;\
         sudo ./etc/DependencyInstaller.sh -runtime ;\
         sudo ./etc/DependencyInstaller.sh -development ;\
         ./etc/Build.sh && cd build && sudo make -j16 install;\
         
 open_pdks:
-	git clone https://github.com/RTimothyEdwards/open_pdks.git ;\
+	git clone --depth=1 https://github.com/RTimothyEdwards/open_pdks.git ;\
 	cd $@ ;\
 	./configure --enable-sky130-pdk --prefix=${HOME}/eda-toolchain ;\
 	make -j16 && make install ;\
 
 openlane:
-	git clone https://github.com/The-OpenROAD-Project/OpenLane.git ;\
+	git clone --depth=1 https://github.com/The-OpenROAD-Project/OpenLane.git ;\
 
 xschem: 
-	git clone https://github.com/StefanSchippers/xschem.git ; \
+	git clone --depth=1 https://github.com/StefanSchippers/xschem.git ; \
 	cd $@ ; \
 	./configure && make -j16 && sudo make install; \
 
 ngspice: 
-	git clone https://git.code.sf.net/p/ngspice/ngspice ;\
+	git clone --depth=1 https://git.code.sf.net/p/ngspice/ngspice ;\
 	cd $@; \
  	./autogen.sh --adms; \
 	mkdir release; \
@@ -100,14 +87,14 @@ ngspice:
 	make -j16 && sudo make install; 
 	
 iverilog:
-	git clone https://github.com/steveicarus/iverilog.git ;\
+	git clone --depth=1 https://github.com/steveicarus/iverilog.git ;\
 	cd $@ ;\
 	sh autoconf.sh; \
 	./configure ;\
 	make -j16 && sudo make install;
 
 verilator:
-	git clone https://github.com/verilator/verilator ;\
+	git clone --depth=1 https://github.com/verilator/verilator ;\
 	cd $@ ;\
 	autoconf; \
 	./configure ;\
@@ -117,8 +104,16 @@ verilator:
 ###############################################################################
 #### ANYTHING BELOW THIS LINE IS A WORK IN PROGRESS - USE AT YOUR OWN RISK ####
 ###############################################################################
+
+gh-cli:
+	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg ;\
+        sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg ;\
+        echo "deb [arch=$$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null ;\
+        sudo apt update ;\
+        sudo apt install -y gh ;\
+
 magical: 
-	git clone https://github.com/magical-eda/MAGICAL.git $@;\
+	git clone --depth=1 https://github.com/magical-eda/MAGICAL.git $@;\
 	cd magical ;\
 	git submodule init ;\
 	git submodule update ;\
@@ -149,7 +144,7 @@ docker:
 #        docker run hello-world; 
 
 padring:
-	git clone https://github.com/donn/padring.git ${INSTALLER_PATH}/$@; \
+	git clone --depth=1 https://github.com/donn/padring.git ${INSTALLER_PATH}/$@; \
 	cd ${INSTALLER_PATH}/$@; \
 	./bootstrap.sh; \
 	cd build; \
@@ -157,7 +152,7 @@ padring:
         cp padring ${HOME}/tools/bin/. ;	
 
 graywolf:
-	git clone https://github.com/rubund/graywolf.git ${INSTALLER_PATH}/$@; \
+	git clone --depth=1 https://github.com/rubund/graywolf.git ${INSTALLER_PATH}/$@; \
 	cd ${INSTALLER_PATH}/$@; \
 	mkdir build && cd build; \
 	cmake -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ \
@@ -165,13 +160,13 @@ graywolf:
 	make -j8 && make -j8 install;
 
 qflow: 
-	git clone https://github.com/RTimothyEdwards/qflow.git ${INSTALLER_PATH}/$@; \
+	git clone --depth=1 https://github.com/RTimothyEdwards/qflow.git ${INSTALLER_PATH}/$@; \
 	cd ${INSTALLER_PATH}/$@; \
         ./configure --prefix=${PREFIX} ; \
 	make -j8 && make -j8 install; 
 
 qrouter: 
-	git clone https://github.com/RTimothyEdwards/qrouter.git; \
+	git clone --depth=1 https://github.com/RTimothyEdwards/qrouter.git; \
         ./configure; \
 	make -j8 && sudo make install; 
 
@@ -182,7 +177,7 @@ cuda:
 	sudo apt -y install cuda; \
 
 openroad-gpu:
-	#git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
+	#git clone --depth=1 --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
 	cd OpenROAD; \
 	sudo ./etc/DependencyInstaller.sh -runtime; \
 	sudo ./etc/DependencyInstaller.sh -development; \
