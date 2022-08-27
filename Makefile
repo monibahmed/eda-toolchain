@@ -1,13 +1,12 @@
 ### Please do 'sudo apt install make -y' first
 ### Manually setup docker for WSL rather than using Makefile
 
-ubuntu: ubuntu-update conda 
 be-tools: magic yosys netgen cvc klayout
 open-tools: openroad open_pdks openlane
 fe-tools: xschem ngspice verilator iverilog
 
 
-ubuntu-update:
+ubuntu:
 	sudo apt update; \
         sudo apt upgrade -y; \
         sudo apt install -y build-essential clang python3 python3-venv python3-pip python-yaml ;\
