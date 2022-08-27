@@ -74,15 +74,15 @@ xschem:
 ngspice: 
 	git clone --depth=1 https://git.code.sf.net/p/ngspice/ngspice ;\
 	cd $@; \
- 	./autogen.sh --adms; \
+ 	./autogen.sh ; \
 	mkdir release; \
 	cd release; \
 	../configure --with-x --enable-xspice --disable-debug \
-		--enable-cider --with-readline=yes --enable-openmp --with-adms; \
+		--enable-cider --with-readline=yes --enable-openmp ; \
 	make -j16 && sudo make install; \
-	make clean; \
+	make clean;\
 	../configure --with-ngshared --with-x --enable-xspice --disable-debug \
-		--enable-cider --with-readline=yes --enable-openmp --with-adms; \
+		--enable-cider --with-readline=yes --enable-openmp ; \
 	make -j16 && sudo make install; 
 	
 iverilog:
