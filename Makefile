@@ -7,10 +7,10 @@ fe-tools: xschem ngspice verilator iverilog
 
 
 ubuntu:
-	 apt update; \
-         apt upgrade -y; \
-         apt install -y build-essential clang python3 python3-venv python3-pip python-yaml ;\
-         apt install -y libx11-xcb-dev libx11-dev libxrender1 libxrender-dev libxcb1 \
+	sudo apt update; \
+        sudo apt upgrade -y; \
+        sudo apt install -y build-essential clang python3 python3-venv python3-pip python-yaml ;\
+        sudo apt install -y libx11-xcb-dev libx11-dev libxrender1 libxrender-dev libxcb1 \
                 libx11-xcb-dev libcairo2 libcairo2-dev gperf csh autopoint swig \
                 tcl8.6 tcl8.6-dev tcllib tk8.6 tk8.6-dev flex bison libxpm4 libxpm-dev \
                 gawk adms autoconf libtool libxcb1 libxaw7-dev libreadline6-dev libfl-dev;
@@ -48,7 +48,8 @@ yosys:
         make -j16 PREFIX=$(HOME)/eda-toolchain/local  &&  make install;
 
 klayout:
-	 apt install -y klayout; \
+	sudosudo apt install -y klayout; \
+
 
 openroad:
 	git clone --depth=1 --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ;\
@@ -56,7 +57,7 @@ openroad:
          ./etc/DependencyInstaller.sh -runtime ;\
          ./etc/DependencyInstaller.sh -development ;\
         ./etc/Build.sh && cd build &&  make -j16 install;\
-        
+
 open_pdks:
 	git clone --depth=1 https://github.com/RTimothyEdwards/open_pdks.git ;\
 	cd $@ ;\
@@ -74,7 +75,7 @@ xschem:
 ngspice: 
 	git clone --depth=1 https://git.code.sf.net/p/ngspice/ngspice ;\
 	cd $@; \
- 	./autogen.sh ; \
+	./autogen.sh ; \
 	mkdir release; \
 	cd release; \
 	../configure --prefix=$(HOME)/eda-toolchain/local  --with-x --enable-xspice --disable-debug \
@@ -84,7 +85,7 @@ ngspice:
 	../configure --prefix=$(HOME)/eda-toolchain/local  --with-ngshared --with-x --enable-xspice --disable-debug \
 		--enable-cider --with-readline=yes --enable-openmp ; \
 	make -j16 &&  make install; 
-	
+
 iverilog:
 	git clone --depth=1 https://github.com/steveicarus/iverilog.git ;\
 	cd $@ ;\
@@ -106,10 +107,10 @@ verilator:
 
 gh-cli:
 	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg |  dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg ;\
-         chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg ;\
+        sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg ;\
         echo "deb [arch=$$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |  tee /etc/apt/sources.list.d/github-cli.list > /dev/null ;\
-         apt update ;\
-         apt install -y gh ;\
+        sudo apt update ;\
+        sudo apt install -y gh ;\
 
 magical: 
 	git clone --depth=1 https://github.com/magical-eda/MAGICAL.git $@;\
@@ -129,13 +130,13 @@ magical:
 ## Optional: Shutdown/Restart Ubuntu
 ##  'docker run hello-world' should work 
 docker: 
-	 apt update ; \
-	 apt install -y ca-certificates curl gnupg lsb-release ; \
-	 mkdir -p /etc/apt/keyrings; \
- 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  gpg --dearmor -o /etc/apt/keyrings/docker.gpg; \
+	sudo apt update ; \
+	sudo apt install -y ca-certificates curl gnupg lsb-release ; \
+	sudo mkdir -p /etc/apt/keyrings; \
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  gpg --dearmor -o /etc/apt/keyrings/docker.gpg; \
 	echo "deb [arch=$$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable" |  tee /etc/apt/sources.list.d/docker.list > /dev/null ;\
-	 apt update ; \
-	 apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin ; \
+	sudo apt update ; \
+	sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin ; \
 #	## Make sure Docker is running before setting up your user
 #	 groupadd docker; \
 #	 usermod -aG docker $$USER;\
@@ -155,7 +156,7 @@ graywolf:
 	cd ${INSTALLER_PATH}/$@; \
 	mkdir build && cd build; \
 	cmake -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ \
-       		-DCMAKE_INSTALL_PREFIX=${PREFIX} ..; \
+	-DCMAKE_INSTALL_PREFIX=${PREFIX} ..; \
 	make -j8 && make -j8 install;
 
 qflow: 
@@ -172,11 +173,11 @@ qrouter:
 cuda:
 	wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb; \
 	 dpkg -i cuda-keyring_1.0-1_all.deb; \
-	 apt update; \
-	 apt -y install cuda; \
+	sudo apt update; \
+	sudo apt -y install cuda; \
 
 openroad-gpu:
-	#git clone --depth=1 --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
+#git clone --depth=1 --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git ; \
 	cd OpenROAD; \
 	 ./etc/DependencyInstaller.sh -runtime; \
 	 ./etc/DependencyInstaller.sh -development; \
