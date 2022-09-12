@@ -32,7 +32,7 @@ cvc:
 	git clone --depth=1 https://github.com/d-m-bailey/cvc.git ;  \
         cd $@; \
         autoreconf -vif; \
-        ./configure --prefix=$(HOME)/eda-toolchain/local  --disable-nls; \
+        ./configure --prefix=$(CONDA_PREFIX) --disable-nls; \
         make -j16 &&  make install;
 
 netgen:
@@ -44,7 +44,7 @@ netgen:
 yosys:
 	git clone --depth=1 https://github.com/YosysHQ/yosys.git ;\
         cd $@ ;\
-        make config-gcc PREFIX=$(HOME)/eda-toolchain/local ;\
+        make config-gcc PREFIX=$(CONDA_PREFIX) ;\
         make -j16 PREFIX=$(HOME)/eda-toolchain/local  &&  make install;
 
 klayout:
@@ -70,7 +70,7 @@ openlane:
 xschem: 
 	git clone --depth=1 https://github.com/StefanSchippers/xschem.git ; \
 	cd $@ ; \
-	./configure --prefix=$(HOME)/eda-toolchain/local  && make -j16 &&  make install; \
+	./configure --prefix=$(CONDA_PREFIX)  && make -j16 &&  make install; \
 
 ngspice: 
 	git clone --depth=1 https://git.code.sf.net/p/ngspice/ngspice ;\
@@ -78,11 +78,11 @@ ngspice:
 	./autogen.sh ; \
 	mkdir release; \
 	cd release; \
-	../configure --prefix=$(HOME)/eda-toolchain/local  --with-x --enable-xspice --disable-debug \
+	../configure --prefix=$(CONDA_PREFIX)  --with-x --enable-xspice --disable-debug \
 		--enable-cider --with-readline=yes --enable-openmp ; \
 	make -j16 &&  make install; \
 	make clean;\
-	../configure --prefix=$(HOME)/eda-toolchain/local  --with-ngshared --with-x --enable-xspice --disable-debug \
+	../configure --prefix=$(CONDA_PREFIX)  --with-ngshared --with-x --enable-xspice --disable-debug \
 		--enable-cider --with-readline=yes --enable-openmp ; \
 	make -j16 &&  make install; 
 
